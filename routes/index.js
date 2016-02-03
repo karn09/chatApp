@@ -16,7 +16,8 @@ module.exports = function(io) {
 
 	router.post('/enter', function(req, res) {
 		var username = req.body.name;
-		io.sockets.emit('user_joined', {name: username});
+		chatBank.addUser(username);
+		io.sockets.emit('user_joined', username);
 		res.redirect('/chat/' + username);
 	});
 
@@ -29,11 +30,13 @@ module.exports = function(io) {
 
     router.get('/chat/:username', function(req, res) {
     	var chats = chatBank.list();
+    	var users = chatBank.userList();
 
     	res.render('chat', { 
     			title: 'Super Amazing Chat Room',
                 chatBank: chats,
-                username: req.params.username
+                username: req.params.username,
+                users: users
             });
     })
 

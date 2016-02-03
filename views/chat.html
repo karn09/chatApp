@@ -1,26 +1,31 @@
 {% extends "layout.html" %} 
 
 {% block content %}
-<div class='row'>
-    <div id='chatbox' class='col-md-9'>
+<div class="row">
+    <div id="chatbox" class="col-md-9">
         <p>
             <h3>Chat area</h3></p>
-        <ul>
+        <ul id="chatHist">
             {% for chat in chatBank %}
-            <li>{% if chat.name === username %} you {% else %} {{chat.name}} {% endif %} : {{chat.chatText}}</li>
+            {% if chat.name === username %}<li class="you">You{% else %}<li class="others">{{chat.name}}{% endif %}: {{chat.chatText}}</li>
             {% endfor %}
         </ul>
     </div>
-    <div id='users' class='col-md-3'>
+    <div id="users" class="col-md-3">
         <p>
-            <h3>Users</h3></p>
+            <h3>Users Connected</h3></p>
+            <ul id="users_list">
+            	{% for key, val in users %}
+            	<li>{{val}}</li>
+            	{% endfor %}
+            </ul>
     </div>
 </div>
 {% endblock %}
 
 {% block chatform %}
 <div class="container">
-    <form action="/chat/{{username}}" method="POST">
+    <form id="chatform" action="/chat/{{username}}" method="POST">
         <label for="chat_field">Text:</label>
         <input name="chat" id="chat_field" type="text" />
         <input type="submit" value="Submit" />

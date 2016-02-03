@@ -20,18 +20,38 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	</head>
 	<body>
-		<div id='wrap'>
+		<div id="wrap">
 			<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/">Chatter</a>
 				</div>
 			</div>
-			<div class="container">
+			<div id="chat_area" class="container">
 				{% block content %}Start chatting!{% endblock %}
 			</div>
 		</div>
-		<div id="footer">
+		<div id="footer" class="navbar navbar-default navbar-fixed-bottom">
 			{% block chatform %}{% endblock %}
 		</div>
 	</body>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+	var socket = io.connect();
+	socket.on('connect', function() {
+		console.log("connected to server via WebSockets!");
+	});
+
+	socket.on('user_joined', function(username) {
+		var userList = document.getElementById('users_list');
+		userList.innerHTML += '<li>' + username + '</li>';
+		console.log(username + ' has joined the chat room.');
+	});
+
+	socket.on('new_chat', function(chat) {
+		var chatHist = document.getElementById('chatHist');
+		chatHist.innerHTML += '<li class="others">' + chat.name + ': ' + chat.text + '</li>';
+	})
+	</script>
+
+
 </html>
