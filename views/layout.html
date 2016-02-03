@@ -31,13 +31,7 @@
 			</div>
 		</div>
 		<div id="footer">
-			<div class="container">
-				<form action="/chat" method="POST">
-					<label for="chat_field">Text:</label>
-					<input name="chat" id="chat_field" type="text" />
-					<input type="submit" value="Submit" />
-				</form>
-			</div>
+			{% block chatform %}{% endblock %}
 		</div>
 	</body>
 </html>

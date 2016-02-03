@@ -1,16 +1,17 @@
-{% extends "layout.html" %}
-{% block content %}
-	<div class='row'>
-		<div id='chatbox' class='col-md-9'>
-			<p><h3>Chat area</h3></p>
-			<p><ul>
-				{% for chat in chatBank %}
-					<li>{{chat.name}} :  {{chat.text}}</li>
-				{% endfor}
-			</ul></p>
-		</div>
-		<div id='users' class='col-md-3'>
-			<p><h3>Users</h3></p>
-		</div>
-	</div>
+{% extends "layout.html" %} {% block content %}
+<div class='row'>
+    <div id='chatbox' class='col-md-9'>
+        <p>
+            <h3>Welcome</h3></p>
+        <form action="/enter" method="POST">
+            <label for="name_field">Please Enter Your Name:</label>
+            <input name="name" id="name_field" type="text" />
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+    <div id='users' class='col-md-3'>
+        <p>
+            <h3>Users</h3></p>
+    </div>
+</div>
 {% endblock %}
