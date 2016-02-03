@@ -13,9 +13,10 @@ module.exports = function(io) {
 	});
 
     router.get('/', function(req, res) {
-        var chats =
+        var chats = chatBank.list();
             res.render('layout', {
                 title: 'Super Amazing Chat Room',
+                chatBank: chats
             });
     });
 
