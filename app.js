@@ -1,10 +1,12 @@
 var express = require('express');
 var app = express();
 var swig = require('swig');
+var morgan = require('morgan');
 
-var iosockets = require('socket.io');
 
-app.listen(3000);
+
+var server = app.listen(3000);
+var socketio = require('socket.io');
 
 app.use(express.static('public'));
 
