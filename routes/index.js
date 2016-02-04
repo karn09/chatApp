@@ -8,6 +8,7 @@ module.exports = function(io) {
 		var username = 'you';
 		var text = req.params.chat;
 		chatBank.add(username, text);
+        console.log(chatBank.list())
 		io.sockets.emit('new_chat', { name: username, text: text });
         res.redirect('/');
 	});

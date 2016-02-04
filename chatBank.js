@@ -6,6 +6,7 @@ function add(name, chatText) {
 }
 
 function list(data) {
+	console.log(data)
 	return _.cloneDeep(data);
 }
 
